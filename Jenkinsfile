@@ -48,9 +48,9 @@ node {
                                 resultPasswords.add(currentPassword)
                                 passwordsStrengths.add(currentStrength)
 
-                                passwordHistory.add(currentPassword.toString())
+                                passwordHistory.add(currentPassword)
                                 println("Added")
-                                passwordHistoryFile.write(currentPassword.toString() + "\n", true)
+                                passwordHistoryFile.write(currentPassword + "\n", true)
                                 println("Written")
                             }
                             
