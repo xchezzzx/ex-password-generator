@@ -1,7 +1,5 @@
 //Oleg Milyukov
-import java.io.File 
-
-
+//import java.io.File 
 
 node {
     stage('Generate Password') {
