@@ -1,0 +1,40 @@
+Started by user Oleg Milyukov
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/lib/jenkins/workspace/ex-password-generator
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Generate Password)
+[Pipeline] echo
+Length of the password: 8
+[Pipeline] echo
+Number of attempts: 5
+[Pipeline] input
+Input requested
+Approved by Oleg Milyukov
+[Pipeline] echo
+attempt #1
+[Pipeline] echo
+step 0: I
+[Pipeline] echo
+step 1: IQ
+[Pipeline] echo
+step 2: IQk
+[Pipeline] echo
+step 3: IQk1
+[Pipeline] echo
+step 4: IQk1Q
+[Pipeline] echo
+step 5: IQk1QT
+[Pipeline] echo
+step 6: IQk1QT1
+[Pipeline] echo
+step 7: IQk1QT1l
+[Pipeline] echo
+Generated password: IQk1QT1l
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
