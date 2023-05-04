@@ -1,8 +1,7 @@
 //Oleg Milyukov
-//import java.io.File 
 
 node {
-    stage('Generate Password') {
+    stage("Generate Password") {
         
         println("Length of the password: ${password_length}")
         println("Number of attempts: ${attempts_number}")
@@ -24,7 +23,6 @@ node {
             passwordHistory = passwordHistoryFile.readLines()
             println("Password history file")
             println passwordHistoryFile.text
-            println("Password history var contains: ${passwordHistory}")
         }
         else {
             passwordHistoryFile.createNewFile()
@@ -40,31 +38,14 @@ node {
             def counter = i
             def label = "password_$i"
             builders [label] = {
-//                    node(label) {
-                            def currentPassword = generatePassword(params.password_length.toInteger(), params.attempts_number.toInteger())
-//                            println("Generated password: ${currentPassword}")
-                            def currentStrength = isPasswordStrong(currentPassword)
-//                            println("Generated password: ${currentStrength}")
+                def currentPassword = generatePassword(params.password_length.toInteger(), params.attempts_number.toInteger())
+                def currentStrength = isPasswordStrong(currentPassword)
 
-                            if (!passwordHistory.contains(currentPassword)) {
-                                
-                                resultPasswords.add(currentPassword)
-                                passwordsStrengths.add(currentStrength)
-
-                                //passwordHistory.add(currentPassword)
-                                println("Added")
-                                //println("Password History contains: ${passwordHistory}")
-                                //passwordHistoryFile.write(passwordHistory + "\n")
-                                passwordHistoryFile.append(currentPassword + "\n")
-                                println("Written 1")
-                                // passwordHistoryFile.write("\n")
-                                // println("Written 2")
-                            }
-                            
-//                        }
-//                    catch (Exception e) {
-//                        println(e.getMessage())
-//                    }
+                if (!passwordHistory.contains(currentPassword)) {
+                    resultPasswords.add(currentPassword)
+                    passwordsStrengths.add(currentStrength)
+                    passwordHistoryFile.append(currentPassword + "\n")
+                }
             }
         }
 
@@ -73,8 +54,6 @@ node {
             println("Generated password: ${resultPasswords[i]}")
             println("Password strength: ${passwordsStrengths[i]}")
         }
-
-        println("Generated passwords: ${resultPasswords}")
 
         println("Password history file")
         println passwordHistoryFile.text
@@ -102,10 +81,7 @@ def generatePassword (int passLength, int maxAttempts) {
             echo "step ${i}: ${password}"
         }
 
-        println("I'm after FOR")
-
         if (password.toString().matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*")) {
-            println("I'm in IF")
             return password.toString()
         } else {
             attempts++
