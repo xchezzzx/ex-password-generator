@@ -1,5 +1,7 @@
 //Oleg Milyukov
 
+
+
 node {
     stage('Generate Password') {
         
@@ -14,6 +16,13 @@ node {
                         description: "integer",
                         name: "password_amount")
                 ])
+        def passwordHistoryFile = "password_history.txt"
+        if (passwordHistoryFile.exists()) {
+            def passwordHistory = passwordHistoryFile.readLines()
+        }
+        else {
+            println("Couldn't open the password history file")
+        }
 
         def resultPasswords = []
         def passwordsStrengths = []
@@ -24,9 +33,9 @@ node {
             def label = "password_$i"
             builders [label] = {
 //                    node(label) {
-                            currentPassword = generatePassword(params.password_length.toInteger(), params.attempts_number.toInteger())
+                            def currentPassword = generatePassword(params.password_length.toInteger(), params.attempts_number.toInteger())
                             println("Generated password: ${currentPassword}")
-                            currentStrength = isPasswordStrong(currentPassword)
+                            def currentStrength = isPasswordStrong(currentPassword)
                             println("Generated password: ${currentStrength}")
 
 
@@ -40,7 +49,7 @@ node {
         }
 
         parallel(builders)
-        for (int 0 = 1; i < password_amount.toInteger(); i++) {
+        for (int i = 0; i < password_amount.toInteger(); i++) {
             println("Generated password: ${resultPasswords[i]}")
             println("Password strength: ${passwordsStrengths[i]}")
         }
@@ -69,7 +78,9 @@ def generatePassword (int passLength, int maxAttempts) {
             }
             echo "step ${i}: ${password}"
         }
-        if (password.toString().matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*")) {
+        if (password.toString().matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*") && !passwordHistory.contains(password.toString())) {
+            passwordHistory.add(password.toString())
+            passwordHistoryFile.write(password.toString() + "\n", true)
             return password.toString()
         } else {
             attempts++
@@ -79,7 +90,7 @@ def generatePassword (int passLength, int maxAttempts) {
 }
 
 def isPasswordStrong (String password) {
-    passwordStrength = ""
+    def passwordStrength = ""
     if (password.length() >= 10)
         passwordStrength += "\u2705"
     if (password.matches("^(?=.*[a-z]).*"))
@@ -89,8 +100,9 @@ def isPasswordStrong (String password) {
     if (password.matches("^(?=.*[0-9]).*"))
         passwordStrength += "\u2705"
 
-
-
+    while (passwordStrength.length() < 4) {
+        passwordStrength += "\u2611"
+    }
 
     return passwordStrength
 }
