@@ -2,7 +2,7 @@
 import java.io.File 
 
 def passwordHistoryFile = new File("password_history.txt")
-def passwordHistory = Collections.synchronizedList([] as ArrayList)
+def passwordHistory = []
 
 node {
     stage('Generate Password') {
