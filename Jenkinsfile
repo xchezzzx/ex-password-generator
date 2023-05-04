@@ -51,7 +51,7 @@ node {
                                 passwordHistory.add(currentPassword)
                                 println("Added")
                                 println("Password History contains: ${passwordHistory}")
-                                passwordHistoryFile.write((String)(currentPassword + "\n"), true)
+                                passwordHistoryFile.writeLine(currentPassword, true)
                                 println("Written 1")
                                 passwordHistoryFile.write("\n", true)
                                 println("Written 2")
