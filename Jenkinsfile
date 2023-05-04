@@ -16,7 +16,7 @@ node {
                         description: "integer",
                         name: "password_amount")
                 ])
-        def passwordHistoryFile = "password_history.txt"
+        def passwordHistoryFile = new File("password_history.txt")
         if (passwordHistoryFile.exists()) {
             def passwordHistory = passwordHistoryFile.readLines()
         }
