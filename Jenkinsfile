@@ -51,10 +51,10 @@ node {
                                 resultPasswords.add(currentPassword)
                                 passwordsStrengths.add(currentStrength)
 
-                                passwordHistory.add(currentPassword)
+                                //passwordHistory.add(currentPassword)
                                 println("Added")
-                                println("Password History contains: ${passwordHistory}")
-                                passwordHistoryFile.write(passwordHistory + "\n")
+                                //println("Password History contains: ${passwordHistory}")
+                                //passwordHistoryFile.write(passwordHistory + "\n")
                                 passwordHistoryFile.writeLine(currentPassword + "\n")
                                 println("Written 1")
                                 // passwordHistoryFile.write("\n")
