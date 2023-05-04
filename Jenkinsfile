@@ -23,7 +23,8 @@ node {
             println("Password History contains: ${passwordHistory}")
         }
         else {
-            println("Couldn't open the password history file")
+            passwordHistoryFile.createNewFile()
+            println("Created password history file.")
         }
 
         def resultPasswords = []
