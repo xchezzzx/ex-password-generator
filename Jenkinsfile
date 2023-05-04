@@ -24,6 +24,7 @@ node {
         }
         else {
             passwordHistoryFile.createNewFile()
+            passwordHistory = passwordHistoryFile.readLines()
             println("Created password history file.")
         }
 
