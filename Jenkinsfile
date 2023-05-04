@@ -17,6 +17,10 @@ node {
                         description: "integer",
                         name: "password_amount")
                 ])
+        
+        def passwordHistoryFile = new File("password_history.txt")
+        def passwordHistory = [] 
+
         if (passwordHistoryFile.exists()) {
             passwordHistory = passwordHistoryFile.readLines()
             println("Password History contains: ${passwordHistory}")
@@ -26,8 +30,7 @@ node {
             passwordHistory = passwordHistoryFile.readLines()
             println("Created password history file.")
         }
-        def passwordHistoryFile = new File("password_history.txt")
-        def passwordHistory = []   
+
         def resultPasswords = []
         def passwordsStrengths = []
         def builders  = [:]
