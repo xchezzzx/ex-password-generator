@@ -50,8 +50,10 @@ node {
 
                                 passwordHistory.add(currentPassword)
                                 println("Added")
-                                passwordHistoryFile.write(currentPassword + "\n", true)
-                                println("Written")
+                                passwordHistoryFile.write(currentPassword, true)
+                                println("Written 1")
+                                passwordHistoryFile.write("\n", true)
+                                println("Written 2")
                             }
                             
 //                        }
