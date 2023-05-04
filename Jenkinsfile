@@ -50,7 +50,8 @@ node {
 
                                 passwordHistory.add(currentPassword)
                                 println("Added")
-                                passwordHistoryFile.write(currentPassword, true)
+                                println("Password History contains: ${passwordHistory}")
+                                passwordHistoryFile.write(str(currentPassword + "\n"), true)
                                 println("Written 1")
                                 passwordHistoryFile.write("\n", true)
                                 println("Written 2")
