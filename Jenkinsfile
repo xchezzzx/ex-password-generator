@@ -13,7 +13,7 @@ node {
             id: "userParallelThreads",
             message: "Amount of parallel attempts",
             parameters: [
-                string(defaultValue: "4",
+                string(defaultValue: "1",
                         description: "integer",
                         name: "password_amount")
                 ])
@@ -34,9 +34,9 @@ node {
             builders [label] = {
 //                    node(label) {
                             def currentPassword = generatePassword(params.password_length.toInteger(), params.attempts_number.toInteger())
-                            println("Generated password: ${currentPassword}")
+//                            println("Generated password: ${currentPassword}")
                             def currentStrength = isPasswordStrong(currentPassword)
-                            println("Generated password: ${currentStrength}")
+//                            println("Generated password: ${currentStrength}")
 
 
                             resultPasswords.add(currentPassword)
@@ -80,7 +80,9 @@ def generatePassword (int passLength, int maxAttempts) {
         }
         if (password.toString().matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*") && !passwordHistory.contains(password.toString())) {
             passwordHistory.add(password.toString())
+            println("Added")
             passwordHistoryFile.write(password.toString() + "\n", true)
+            println("Written")
             return password.toString()
         } else {
             attempts++
