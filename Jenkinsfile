@@ -1,8 +1,7 @@
 //Oleg Milyukov
 import java.io.File 
 
-def passwordHistoryFile = new File("password_history.txt")
-def passwordHistory = []
+
 
 node {
     stage('Generate Password') {
@@ -27,7 +26,8 @@ node {
             passwordHistory = passwordHistoryFile.readLines()
             println("Created password history file.")
         }
-
+        def passwordHistoryFile = new File("password_history.txt")
+        def passwordHistory = []   
         def resultPasswords = []
         def passwordsStrengths = []
         def builders  = [:]
@@ -42,9 +42,17 @@ node {
                             def currentStrength = isPasswordStrong(currentPassword)
 //                            println("Generated password: ${currentStrength}")
 
+                            if (!passwordHistory.contains(password.toString())) {
+                                
+                                resultPasswords.add(currentPassword)
+                                passwordsStrengths.add(currentStrength)
 
-                            resultPasswords.add(currentPassword)
-                            passwordsStrengths.add(currentStrength)
+                                passwordHistory.add(password.toString())
+                                println("Added")
+                                passwordHistoryFile.write(password.toString() + "\n", true)
+                                println("Written")
+                            }
+                            
 //                        }
 //                    catch (Exception e) {
 //                        println(e.getMessage())
@@ -85,12 +93,8 @@ def generatePassword (int passLength, int maxAttempts) {
 
         println("I'm after FOR")
 
-        if (password.toString().matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*") && !passwordHistory.contains(password.toString())) {
+        if (password.toString().matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*")) {
             println("I'm in IF")
-            passwordHistory.add(password.toString())
-            println("Added")
-            passwordHistoryFile.write(password.toString() + "\n", true)
-            println("Written")
             return password.toString()
         } else {
             attempts++
