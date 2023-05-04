@@ -119,7 +119,7 @@ def isPasswordStrong (String password) {
         passwordStrength += "\u2705"
 
     while (passwordStrength.length() < 4) {
-        passwordStrength += "\u2611"
+        passwordStrength += "\u274E"
     }
 
     return passwordStrength
