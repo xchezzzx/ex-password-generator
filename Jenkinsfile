@@ -75,6 +75,9 @@ node {
         }
 
         println("Generated passwords: ${resultPasswords}")
+
+        println("Password history file")
+        println passwordHistoryFile.text
     }
 }
 
