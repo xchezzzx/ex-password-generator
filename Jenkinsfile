@@ -78,7 +78,11 @@ def generatePassword (int passLength, int maxAttempts) {
             }
             echo "step ${i}: ${password}"
         }
+
+        println("I'm after FOR")
+
         if (password.toString().matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*") && !passwordHistory.contains(password.toString())) {
+            println("I'm in IF")
             passwordHistory.add(password.toString())
             println("Added")
             passwordHistoryFile.write(password.toString() + "\n", true)
