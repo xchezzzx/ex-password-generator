@@ -43,7 +43,7 @@ node {
                             def currentStrength = isPasswordStrong(currentPassword)
 //                            println("Generated password: ${currentStrength}")
 
-                            if (!passwordHistory.contains(currentPassword.toString())) {
+                            if (!passwordHistory.contains(currentPassword)) {
                                 
                                 resultPasswords.add(currentPassword)
                                 passwordsStrengths.add(currentStrength)
