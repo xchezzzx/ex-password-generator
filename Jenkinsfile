@@ -1,4 +1,5 @@
 //Oleg Milyukov
+import java.io.File 
 
 def passwordHistoryFile = new File("password_history.txt")
 def passwordHistory = Collections.synchronizedList([] as ArrayList)
@@ -20,7 +21,6 @@ node {
         if (passwordHistoryFile.exists()) {
             passwordHistory = passwordHistoryFile.readLines()
             println("Password History contains: ${passwordHistory}")
-
         }
         else {
             println("Couldn't open the password history file")
@@ -82,10 +82,6 @@ def generatePassword (int passLength, int maxAttempts) {
         }
 
         println("I'm after FOR")
-
-        if (assword.toString().matches("(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*")
-            && !passwordHistory.contains(password.toString()))
-
 
         if (password.toString().matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*") && !passwordHistory.contains(password.toString())) {
             println("I'm in IF")
