@@ -20,8 +20,11 @@ node {
         def passwordHistory = [] 
 
         if (passwordHistoryFile.exists()) {
+            println("Password history file exists.")
             passwordHistory = passwordHistoryFile.readLines()
-            println("Password History contains: ${passwordHistory}")
+            println("Password history file")
+            println passwordHistoryFile.text
+            println("Password history var contains: ${passwordHistory}")
         }
         else {
             passwordHistoryFile.createNewFile()
@@ -52,7 +55,7 @@ node {
                                 println("Added")
                                 println("Password History contains: ${passwordHistory}")
                                 passwordHistoryFile.write(passwordHistory + "\n")
-                                passwordHistoryFile.write(currentPassword + "\n")
+                                passwordHistoryFile.writeLine(currentPassword + "\n")
                                 println("Written 1")
                                 // passwordHistoryFile.write("\n")
                                 // println("Written 2")
