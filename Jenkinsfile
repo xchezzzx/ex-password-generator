@@ -1,6 +1,7 @@
 //Oleg Milyukov
 
-
+def passwordHistoryFile = new File("password_history.txt")
+def passwordHistory = Collections.synchronizedList([] as ArrayList)
 
 node {
     stage('Generate Password') {
@@ -16,9 +17,8 @@ node {
                         description: "integer",
                         name: "password_amount")
                 ])
-        def passwordHistoryFile = new File("password_history.txt")
         if (passwordHistoryFile.exists()) {
-            def passwordHistory = passwordHistoryFile.readLines()
+            passwordHistory = passwordHistoryFile.readLines()
         }
         else {
             println("Couldn't open the password history file")
